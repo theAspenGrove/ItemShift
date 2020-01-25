@@ -1,6 +1,10 @@
 package net.mov51.itemshift.command.util;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.entity.Player;
+import net.md_5.bungee.api.ChatColor;
 
 public class MessageBuilder {
 
@@ -10,6 +14,7 @@ public class MessageBuilder {
         player.sendMessage(PREFIX + message);
     }
     public static void sendBarToPlayer(String message, Player player){
-        player.sendTitle("",message,10,60,10);
+        BaseComponent[] msg = new ComponentBuilder(message).color(ChatColor.YELLOW).bold( true ).create();
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, msg);
     }
 }
