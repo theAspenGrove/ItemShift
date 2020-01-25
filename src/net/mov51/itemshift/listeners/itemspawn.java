@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class itemspawn implements Listener {
@@ -21,9 +22,12 @@ public class itemspawn implements Listener {
             if(arrayManager.INSTANCE.autoPickupList.contains(player.getUniqueId())) {
                 ItemStack mainhand = Objects.requireNonNull(player.getEquipment()).getItemInMainHand();
                 e.getBlock().getDrops(mainhand).forEach(item -> {
-                    e.setDropItems(false);
-                    if (!player.getInventory().addItem(item).isEmpty()) {
+                    HashMap<Integer,ItemStack> droppedItems = player.getInventory().addItem(item);
+                    if (!droppedItems.isEmpty()) {
+                        e.setDropItems(true);
                         MessageBuilder.sendBarToPlayer("your inventory is full!", player);
+                    }else{
+                        e.setDropItems(false);
                     }
                 });
             }
