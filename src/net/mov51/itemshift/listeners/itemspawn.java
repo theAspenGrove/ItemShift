@@ -23,7 +23,7 @@ public class itemspawn implements Listener {
                 e.getBlock().getDrops(mainhand).forEach(item -> {
                     e.setDropItems(false);
                     if (!player.getInventory().addItem(item).isEmpty()) {
-                        MessageBuilder.sendToPlayer("your inventory is full!", player);
+                        MessageBuilder.sendBarToPlayer("your inventory is full!", player);
                     }
                 });
             }

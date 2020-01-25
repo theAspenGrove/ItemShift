@@ -17,7 +17,7 @@ public class toggle implements CommandExecutor {
                 if(player!=null && commandSender.hasPermission("itemshift.autopickup")){
                     arrayManager.INSTANCE.toggleAutoPickup(player);
                 }else{
-                    MessageBuilder.sendToPlayer("Your AutoPickup permissions have been revoked! Speak to a staff member!",player);
+                    MessageBuilder.sendChatToPlayer("Your AutoPickup permissions have been revoked! Speak to a staff member!",player);
                 }
             }
         }

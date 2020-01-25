@@ -14,11 +14,11 @@ public class arrayManager {
         UUID uuid = player.getUniqueId();
         if(!arrayManager.INSTANCE.autoPickupList.contains(uuid)){
             arrayManager.INSTANCE.autoPickupList.add(uuid);
-            MessageBuilder.sendToPlayer("You are now picking up all items!",player);
+            MessageBuilder.sendChatToPlayer("You are now picking up all items!",player);
         }else{
             while (arrayManager.INSTANCE.autoPickupList.contains(uuid)){
                 arrayManager.INSTANCE.autoPickupList.remove(uuid);
-                MessageBuilder.sendToPlayer("You are no longer picking up items!",player);
+                MessageBuilder.sendChatToPlayer("You are no longer picking up items!",player);
             }
         }
     }
