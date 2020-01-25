@@ -1,0 +1,8 @@
+name: "ItemShift"
+version: "1.0"
+author: mov51
+main: net.mov51.itemshift.ItemShift
+api-version: "1.15"
+commands:
+  autopickup:
+    description: allows you to automatically pickup items when mining
