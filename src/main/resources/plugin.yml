@@ -1,0 +1,7 @@
+name: Itemshift
+version: ${project.version}
+main: net.mov51.ItemShift.Itemshift
+api-version: 1.16
+commands:
+  autopickup:
+    description: allows you to automatically pickup items when mining
