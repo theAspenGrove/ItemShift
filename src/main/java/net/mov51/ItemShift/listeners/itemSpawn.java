@@ -14,10 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class itemSpawn implements Listener {
 
@@ -28,11 +25,13 @@ public class itemSpawn implements Listener {
             if (arrayManager.INSTANCE.autoPickupList.contains(player.getUniqueId())) {
                 for(Item I : e.getItems()){
                     HashMap<java.lang.Integer, org.bukkit.inventory.ItemStack> drops = player.getInventory().addItem(I.getItemStack());
+                    if(drops.size() == 0){
+                        float pitch = 0 + new Random().nextFloat() * (2f - 0f);
+                        player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 1f, pitch);
+                    }
                     for (ItemStack Item : drops.values()){
                         player.getWorld().dropItemNaturally(e.getBlock().getLocation(), Item);
                         MessageBuilder.sendChatToPlayer("Your inventory is full!", player);
-                        Location Local = player.getLocation();
-                        player.playSound(Local, Sound.ENTITY_ITEM_PICKUP, 1f, 1f);
                     }
                 }
                 e.setCancelled(true);
