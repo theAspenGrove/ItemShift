@@ -1,11 +1,11 @@
-package net.mov51.itemshift.command;
+package net.mov51.ItemShift.command;
 
-import net.mov51.itemshift.command.util.MessageBuilder;
+import net.mov51.ItemShift.command.util.MessageBuilder;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import net.mov51.itemshift.command.util.arrayManager;
+import net.mov51.ItemShift.command.util.arrayManager;
 
 public class toggle implements CommandExecutor {
 

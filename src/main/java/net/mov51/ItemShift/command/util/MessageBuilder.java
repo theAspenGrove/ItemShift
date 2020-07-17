@@ -1,4 +1,4 @@
-package net.mov51.itemshift.command.util;
+package net.mov51.ItemShift.command.util;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;

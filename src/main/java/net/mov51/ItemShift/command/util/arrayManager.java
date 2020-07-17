@@ -1,4 +1,4 @@
-package net.mov51.itemshift.command.util;
+package net.mov51.ItemShift.command.util;
 
 import org.bukkit.entity.Player;
 
@@ -14,7 +14,12 @@ public class arrayManager {
         UUID uuid = player.getUniqueId();
         if(!arrayManager.INSTANCE.autoPickupList.contains(uuid)){
             arrayManager.INSTANCE.autoPickupList.add(uuid);
-            MessageBuilder.sendChatToPlayer("You are now picking up all items!",player);
+            if(arrayManager.INSTANCE.autoPickupList.contains(uuid)) {
+                MessageBuilder.sendChatToPlayer("You are now picking up all items!", player);
+            }else{
+                MessageBuilder.sendChatToPlayer("Something Broke", player);
+                MessageBuilder.sendChatToPlayer(arrayManager.INSTANCE.autoPickupList.toString(), player);
+            }
         }else{
             while (arrayManager.INSTANCE.autoPickupList.contains(uuid)){
                 arrayManager.INSTANCE.autoPickupList.remove(uuid);
@@ -23,6 +28,6 @@ public class arrayManager {
         }
     }
     public arrayManager(){}
-        //Create singleton instance - mov51
-        public static final arrayManager INSTANCE = new arrayManager();
+    //Create singleton instance - mov51
+    public static final arrayManager INSTANCE = new arrayManager();
 }
