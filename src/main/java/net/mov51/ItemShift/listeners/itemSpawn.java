@@ -22,7 +22,7 @@ public class itemSpawn implements Listener {
     public void onBreak(BlockDropItemEvent e) {
         Player player = e.getPlayer();
         if (!e.isCancelled() && player.getGameMode() == GameMode.SURVIVAL) {
-            if (arrayManager.INSTANCE.autoPickupList.contains(player.getUniqueId())) {
+            if (arrayManager.INSTANCE.autoPickupList.contains(player.getUniqueId()) || player.hasPermission("itemshift.autopickupforce") && !player.isOp()) {
                 for(Item I : e.getItems()){
                     HashMap<java.lang.Integer, org.bukkit.inventory.ItemStack> drops = player.getInventory().addItem(I.getItemStack());
                     if(drops.size() == 0){
@@ -31,7 +31,7 @@ public class itemSpawn implements Listener {
                     }
                     for (ItemStack Item : drops.values()){
                         player.getWorld().dropItemNaturally(e.getBlock().getLocation(), Item);
-                        MessageBuilder.sendChatToPlayer("Your inventory is full!", player);
+                        MessageBuilder.sendBarToPlayer("Your inventory is full!", player);
                     }
                 }
                 e.setCancelled(true);
