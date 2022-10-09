@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDropItemEvent;
 
 import static net.mov51.ItemShift.util.HoldingGold.isHoldingGold;
-import static net.mov51.ItemShift.util.dropMaker.makeDrops;
 
 public class itemSpawn implements Listener {
 
@@ -26,5 +25,8 @@ public class itemSpawn implements Listener {
                 }
             }
         }
+    }
+    public static void makeDrops(Player p, Item item){
+        p.getLocation().getWorld().dropItem(p.getLocation(),item.getItemStack()).setPickupDelay(0);
     }
 }

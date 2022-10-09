@@ -8,10 +8,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 
 import static net.mov51.ItemShift.util.HoldingGold.isHoldingGold;
+import static net.mov51.ItemShift.util.configHelper.levelCost;
 
 public class itemDamage implements Listener {
-
-    float levelsToRemove = 0.0556f;
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onBreak(PlayerItemDamageEvent e) {
@@ -19,10 +18,10 @@ public class itemDamage implements Listener {
         if(isHoldingGold(p)) {
             Level levelProgress = new Level(p.getLevel(), p.getExp());
             if (levelProgress.getLevel() > 0) {
-                if (levelProgress.getProgress() > levelsToRemove) {
-                    levelProgress.setProgress(levelProgress.getProgress() - levelsToRemove);
+                if (levelProgress.getProgress() > levelCost) {
+                    levelProgress.setProgress(levelProgress.getProgress() - levelCost);
                 } else {
-                    levelProgress.setProgress(levelProgress.getProgress() + (1.0f - levelsToRemove));
+                    levelProgress.setProgress(levelProgress.getProgress() + (1.0f - levelCost));
                     if(levelProgress.getLevel() < 1){
                         return;
                     }

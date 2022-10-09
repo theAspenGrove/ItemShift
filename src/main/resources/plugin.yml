@@ -1,6 +1,6 @@
-name: Itemshift
+name: ItemShift
 version: ${project.version}
-main: net.mov51.ItemShift.Itemshift
+main: net.mov51.ItemShift.ItemShift
 api-version: 1.16
 commands:
   autopickup:
