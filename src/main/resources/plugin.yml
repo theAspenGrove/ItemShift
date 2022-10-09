@@ -5,3 +5,7 @@ api-version: 1.16
 commands:
   autopickup:
     description: allows you to automatically pickup items when mining
+permissions:
+  itemshift.autopickupforce:
+    description: Forces player to use the autopickup feature
+    default: false
