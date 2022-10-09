@@ -18,17 +18,7 @@ public class itemSpawn implements Listener {
         Player p = e.getPlayer();
         if (!e.isCancelled() && p.getGameMode() == GameMode.SURVIVAL) {
             if (isHoldingGold(p)) {
-                int level = p.getLevel();
-                float progress = p.getExp();
-                if(progress > 0.25){
-                    progress = progress - 0.25f;
-                } else {
-                    progress = progress + 0.75f;
-                    level = level - 1;
-                }
-                if(level > 0) {
-                    p.setExp(progress);
-                    p.setLevel(level);
+                if (p.getLevel() > 0) {
                     for (Item I : e.getItems()) {
                         makeDrops(p, I);
                     }
