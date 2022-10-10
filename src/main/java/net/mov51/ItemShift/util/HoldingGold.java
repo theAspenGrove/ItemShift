@@ -1,10 +1,14 @@
 package net.mov51.ItemShift.util;
 
 import org.bukkit.Material;
+import org.bukkit.block.ShulkerBox;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BlockStateMeta;
 
 import java.util.*;
+
+import static net.mov51.ItemShift.util.configHelper.nuggetCost;
 
 public class HoldingGold {
 
@@ -22,5 +26,45 @@ public class HoldingGold {
 
     public static boolean isItemGold(ItemStack item) {
         return Arrays.asList(Arrays.stream(goldItems).toArray()).contains(item.getType());
+    }
+
+    public static boolean hasNuggets(Player player, boolean remove) {
+        ItemStack[] inv = player.getInventory().getContents();
+        ItemStack[] hotBar = Arrays.copyOfRange(inv, 0, 9);
+        for (ItemStack item : hotBar) {
+            if (containsNugget(item, remove)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean containsNugget(ItemStack item,boolean remove){
+        boolean hasNugget = false;
+        if(item == null){
+            return false;
+        }
+        if(item.getType() == Material.GOLD_NUGGET){
+            if(remove){
+                item.setAmount(item.getAmount()-nuggetCost);
+            }
+            hasNugget = true;
+        } else if (item.getType() == Material.SHULKER_BOX){
+            BlockStateMeta meta = (BlockStateMeta) item.getItemMeta();
+            ShulkerBox box = (ShulkerBox) meta.getBlockState();
+            for (ItemStack i : box.getInventory().getContents()) {
+                if(i != null) {
+                    if(i.getType() == Material.GOLD_NUGGET){
+                        if (remove) {
+                            i.setAmount(i.getAmount()-nuggetCost);
+                        }
+                        hasNugget = true;
+                        break;
+                    }
+                }
+            }
+            meta.setBlockState(box);
+            item.setItemMeta(meta);
+        }
+        return hasNugget;
     }
 }
