@@ -15,7 +15,7 @@ public class itemDamage implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onBreak(PlayerItemDamageEvent e) {
         Player p = e.getPlayer();
-            if(e.getPlayer().getInventory().getItemInMainHand().getType() == e.getItem().getType() && isItemGold(e.getItem()) || hasNuggets(p, true)){
+            if(e.getPlayer().getInventory().getItemInMainHand().getType() == e.getItem().getType() && (isItemGold(e.getItem()) || hasNuggets(p, true))){
                 if (p.getLevel() > 0) {
                     p.giveExp(-levelCost);
                     //cancel item damage
