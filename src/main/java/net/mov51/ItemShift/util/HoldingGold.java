@@ -2,6 +2,7 @@ package net.mov51.ItemShift.util;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
@@ -17,5 +18,9 @@ public class HoldingGold {
 
     public static boolean isHoldingGold(Player player) {
         return Arrays.asList(Arrays.stream(goldItems).toArray()).contains(player.getInventory().getItemInMainHand().getType());
+    }
+
+    public static boolean isItemGold(ItemStack item) {
+        return Arrays.asList(Arrays.stream(goldItems).toArray()).contains(item.getType());
     }
 }
