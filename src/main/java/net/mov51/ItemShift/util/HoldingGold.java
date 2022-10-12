@@ -24,10 +24,6 @@ public class HoldingGold {
         return Arrays.asList(Arrays.stream(goldItems).toArray()).contains(player.getInventory().getItemInMainHand().getType());
     }
 
-    public static boolean isItemGold(ItemStack item) {
-        return Arrays.asList(Arrays.stream(goldItems).toArray()).contains(item.getType());
-    }
-
     public static boolean hasNuggets(Player player, boolean remove) {
         ItemStack[] inv = player.getInventory().getContents();
         ItemStack[] hotBar = Arrays.copyOfRange(inv, 0, 9);
