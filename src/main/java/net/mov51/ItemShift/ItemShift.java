@@ -1,5 +1,6 @@
 package net.mov51.ItemShift;
 
+import net.mov51.ItemShift.listeners.BlockBreak;
 import net.mov51.ItemShift.listeners.itemDamage;
 import net.mov51.ItemShift.listeners.itemSpawn;
 import net.mov51.periderm.logs.AspenLogHelper;
@@ -29,6 +30,7 @@ public final class ItemShift extends JavaPlugin {
         //register events
         getServer().getPluginManager().registerEvents(new itemSpawn(), this);
         getServer().getPluginManager().registerEvents(new itemDamage(), this);
+        getServer().getPluginManager().registerEvents(new BlockBreak(), this);
         //send enable message
         logHelper.sendLogInfo("Items are being shifted!");
     }
