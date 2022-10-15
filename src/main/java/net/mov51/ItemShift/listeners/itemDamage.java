@@ -15,15 +15,18 @@ public class itemDamage implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDamageEvent(PlayerItemDamageEvent e) {
     Player p = e.getPlayer();
-        if(brokenPlayers.contains(p)){
-            if (p.getLevel() > 0) {
-                p.giveExp(-levelCost);
-                if(e.getPlayer().getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.MENDING)){
-                    e.setCancelled(true);
-                    p.giveExp(-(levelCost * mendingMultiplier));
-                }
-            }
-            brokenPlayers.remove(p);
+        if(!brokenPlayers.contains(p)) {
+            return;
         }
+        if (!(p.getLevel() > 0)) {
+            return;
+        }
+        if(e.getDamage() > 0 && e.getPlayer().getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.MENDING)){
+            e.setCancelled(true);
+            p.giveExp(-(levelCost * mendingMultiplier));
+        }else{
+            p.giveExp(-levelCost);
+        }
+        brokenPlayers.remove(p);
     }
 }
