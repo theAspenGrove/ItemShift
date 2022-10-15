@@ -28,6 +28,6 @@ public class itemSpawn implements Listener {
         }
     }
     public static void makeDrops(Player p, Item item){
-        p.getLocation().getWorld().dropItem(p.getLocation(),item.getItemStack()).setPickupDelay(0);
+        p.getLocation().getWorld().dropItem(p.getLocation().subtract(0,0.5,0),item.getItemStack()).setPickupDelay(0);
     }
 }
