@@ -11,7 +11,6 @@ import java.util.*;
 import static net.mov51.ItemShift.util.configHelper.nuggetCost;
 
 public class HoldingGold {
-
     public static Material[] goldItems = {
             Material.GOLDEN_SWORD,
             Material.GOLDEN_SHOVEL,
@@ -37,7 +36,6 @@ public class HoldingGold {
             Material.WHITE_SHULKER_BOX,
             Material.YELLOW_SHULKER_BOX
     };
-
     public static boolean isHoldingGold(Player player) {
         return Arrays.asList(Arrays.stream(goldItems).toArray()).contains(player.getInventory().getItemInMainHand().getType());
     }

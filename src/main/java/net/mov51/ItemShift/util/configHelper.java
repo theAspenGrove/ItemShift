@@ -17,5 +17,4 @@ public class configHelper {
         nuggetCost = (c.getInt("nugget-cost") != 0 ? c.getInt("nugget-cost") : 1);
         mendingMultiplier = (c.getInt("mending-multiplier") != 0 ? c.getInt("mending-multiplier") : 5);
     }
-
 }

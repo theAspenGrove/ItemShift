@@ -12,7 +12,6 @@ import static net.mov51.ItemShift.util.configHelper.levelCost;
 import static net.mov51.ItemShift.util.configHelper.mendingMultiplier;
 
 public class itemDamage implements Listener {
-
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDamageEvent(PlayerItemDamageEvent e) {
     Player p = e.getPlayer();

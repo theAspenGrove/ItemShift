@@ -11,13 +11,9 @@ import java.util.logging.Logger;
 import static net.mov51.ItemShift.util.configHelper.loadConfig;
 
 public final class ItemShift extends JavaPlugin {
-
     public static Logger logger;
     public static AspenLogHelper logHelper;
-
     public static ItemShift plugin;
-
-
     @Override
     public void onEnable() {
         plugin = getPlugin(ItemShift.class);
