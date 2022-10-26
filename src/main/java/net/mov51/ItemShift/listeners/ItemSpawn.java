@@ -11,7 +11,7 @@ import org.bukkit.event.block.BlockDropItemEvent;
 import static net.mov51.ItemShift.util.HoldingGold.hasNuggets;
 import static net.mov51.ItemShift.util.HoldingGold.isHoldingGold;
 
-public class itemSpawn implements Listener {
+public class ItemSpawn implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onBreak(BlockDropItemEvent e) {
         Player p = e.getPlayer();

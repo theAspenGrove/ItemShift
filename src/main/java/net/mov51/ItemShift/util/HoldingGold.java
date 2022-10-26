@@ -8,7 +8,7 @@ import org.bukkit.inventory.meta.BlockStateMeta;
 
 import java.util.*;
 
-import static net.mov51.ItemShift.util.configHelper.nuggetCost;
+import static net.mov51.ItemShift.util.ConfigHelper.nuggetCost;
 
 public class HoldingGold {
     public static Material[] goldItems = {
@@ -34,7 +34,8 @@ public class HoldingGold {
             Material.PURPLE_SHULKER_BOX,
             Material.RED_SHULKER_BOX,
             Material.WHITE_SHULKER_BOX,
-            Material.YELLOW_SHULKER_BOX
+            Material.YELLOW_SHULKER_BOX,
+            Material.SHULKER_BOX
     };
     public static boolean isHoldingGold(Player player) {
         return Arrays.asList(Arrays.stream(goldItems).toArray()).contains(player.getInventory().getItemInMainHand().getType());

@@ -8,10 +8,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 
 import static net.mov51.ItemShift.listeners.BlockBreak.brokenPlayers;
-import static net.mov51.ItemShift.util.configHelper.levelCost;
-import static net.mov51.ItemShift.util.configHelper.mendingMultiplier;
+import static net.mov51.ItemShift.util.ConfigHelper.levelCost;
+import static net.mov51.ItemShift.util.ConfigHelper.mendingMultiplier;
 
-public class itemDamage implements Listener {
+public class ItemDamage implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDamageEvent(PlayerItemDamageEvent e) {
     Player p = e.getPlayer();

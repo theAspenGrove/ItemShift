@@ -1,14 +1,15 @@
 package net.mov51.ItemShift;
 
 import net.mov51.ItemShift.listeners.BlockBreak;
-import net.mov51.ItemShift.listeners.itemDamage;
-import net.mov51.ItemShift.listeners.itemSpawn;
+import net.mov51.ItemShift.listeners.ItemDamage;
+import net.mov51.ItemShift.listeners.ItemPickup;
+import net.mov51.ItemShift.listeners.ItemSpawn;
 import net.mov51.periderm.logs.AspenLogHelper;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
 
-import static net.mov51.ItemShift.util.configHelper.loadConfig;
+import static net.mov51.ItemShift.util.ConfigHelper.loadConfig;
 
 public final class ItemShift extends JavaPlugin {
     public static Logger logger;
@@ -24,9 +25,10 @@ public final class ItemShift extends JavaPlugin {
         logger = this.getLogger();
         logHelper = new AspenLogHelper(logger, "ItemShift");
         //register events
-        getServer().getPluginManager().registerEvents(new itemSpawn(), this);
-        getServer().getPluginManager().registerEvents(new itemDamage(), this);
+        getServer().getPluginManager().registerEvents(new ItemSpawn(), this);
+        getServer().getPluginManager().registerEvents(new ItemDamage(), this);
         getServer().getPluginManager().registerEvents(new BlockBreak(), this);
+        getServer().getPluginManager().registerEvents(new ItemPickup(), this);
         //send enable message
         logHelper.sendLogInfo("Items are being shifted!");
     }
