@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 
+import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
 import static net.mov51.ItemShift.util.GiveItem.fillShulker;
 import static net.mov51.ItemShift.util.GiveItem.giveItem;
 import static net.mov51.ItemShift.util.HoldingGold.*;
@@ -20,7 +21,7 @@ public class ItemSpawn implements Listener {
         Player p = e.getPlayer();
         if (!e.isCancelled() && p.getGameMode() == GameMode.SURVIVAL) {
             if (isHoldingGold(p) || hasNuggets(p, false)) {
-                if (p.getLevel() > 0) {
+                if (p.getLevel() > minimumLevel) {
                     ItemStack offHand = p.getInventory().getItemInOffHand();
                     //check if offhand is a shulker
                     if(Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(offHand.getType())){
