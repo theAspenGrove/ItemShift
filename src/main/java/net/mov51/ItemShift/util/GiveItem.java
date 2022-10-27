@@ -10,11 +10,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 import static net.mov51.ItemShift.util.ConfigHelper.shulkerFillCost;
+import static net.mov51.ItemShift.util.HoldingGold.Shulkers;
 import static org.bukkit.Sound.ENTITY_ITEM_PICKUP;
 
 public class GiveItem {
@@ -47,17 +49,22 @@ public class GiveItem {
         //cast the block state to a shulker box
         ShulkerBox box = (ShulkerBox) meta.getBlockState();
         for(Item i : items){
+            //if it's a shulker, skip adding it to the shulker box and add it to inventory instead
+            if(Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(i.getItemStack().getType())){
+                giveItem(p,i.getItemStack(),p.getInventory());
+                continue;
+            }
             //play the standard pickup sound
             p.playSound(p.getLocation(), ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2f, (random.nextFloat() - random.nextFloat()) * 1.4f + 2.0f);
             //add items to the shulker box then get the leftovers from the shulker box and drop them on the ground
             HashMap <Integer, ItemStack> leftovers = box.getInventory().addItem(i.getItemStack());
             if(leftovers.size() > 0) {
                 for (ItemStack j : leftovers.values()) {
-                    p.getWorld().dropItem(p.getLocation(), j);
+                    giveItem(p,j,p.getInventory());
                 }
             }
             //increment the player's item pickup statistic
-            p.incrementStatistic(Statistic.PICKUP, i.getType());
+            p.incrementStatistic(Statistic.PICKUP, i.getItemStack().getType());
             //remove the shulkerFillCost from the player's level
             p.giveExp(-shulkerFillCost);
         }
