@@ -8,8 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 
 import static net.mov51.ItemShift.listeners.BlockBreak.brokenPlayers;
-import static net.mov51.ItemShift.util.ConfigHelper.levelCost;
-import static net.mov51.ItemShift.util.ConfigHelper.mendingMultiplier;
+import static net.mov51.ItemShift.util.ConfigHelper.*;
 
 public class ItemDamage implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
@@ -18,7 +17,7 @@ public class ItemDamage implements Listener {
         if(!brokenPlayers.contains(p)) {
             return;
         }
-        if (!(p.getLevel() > 0)) {
+        if (!(p.getLevel() > minimumLevel)) {
             return;
         }
         if(e.getDamage() > 0 && e.getPlayer().getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.MENDING)){
