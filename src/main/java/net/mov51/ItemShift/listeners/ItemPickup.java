@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Random;
 
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
 import static net.mov51.ItemShift.util.GiveItem.fillShulker;
@@ -20,18 +19,19 @@ public class ItemPickup implements Listener {
     public void onBreak(EntityPickupItemEvent e) {
         if(e.getEntity() instanceof Player){
             Player p = (Player) e.getEntity();
-            if(p.getLevel() > minimumLevel){
-                ItemStack offHand = p.getInventory().getItemInOffHand();
-                //check if offhand is a shulker
-                if(Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(offHand.getType())){
-                    //prevent item pickup
-                    e.setCancelled(true);
-                    //remove the item from the world
-                    e.getItem().remove();
-                    //add item to shulker box using the returned item meta
-                    offHand.setItemMeta(fillShulker(p, Collections.singletonList(e.getItem())));
-                }
+            if(p.getLevel() < minimumLevel){
+                return;
             }
-        }
+            ItemStack offHand = p.getInventory().getItemInOffHand();
+            //check if offhand is a shulker
+            if(Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(offHand.getType())){
+                //prevent item pickup
+                e.setCancelled(true);
+                //remove the item from the world
+                e.getItem().remove();
+                //add item to shulker box using the returned item meta
+                offHand.setItemMeta(fillShulker(p, Collections.singletonList(e.getItem())));
+            }
+    }
     }
 }
