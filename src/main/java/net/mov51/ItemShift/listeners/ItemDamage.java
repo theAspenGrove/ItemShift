@@ -12,7 +12,7 @@ import static net.mov51.ItemShift.util.ConfigHelper.*;
 
 public class ItemDamage implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onDamageEvent(PlayerItemDamageEvent e) {
+    public void onToolDamage(PlayerItemDamageEvent e) {
     Player p = e.getPlayer();
         if(!brokenPlayers.contains(p)) {
             return;

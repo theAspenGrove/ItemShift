@@ -16,7 +16,7 @@ import static net.mov51.ItemShift.util.HoldingGold.Shulkers;
 
 public class ItemPickup implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onBreak(EntityPickupItemEvent e) {
+    public void onPickup(EntityPickupItemEvent e) {
         if(e.getEntity() instanceof Player){
             Player p = (Player) e.getEntity();
             if(p.getLevel() < minimumLevel){

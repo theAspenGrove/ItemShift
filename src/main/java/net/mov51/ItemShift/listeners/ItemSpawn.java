@@ -17,7 +17,7 @@ import static net.mov51.ItemShift.util.HoldingGold.*;
 
 public class ItemSpawn implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onBreak(BlockDropItemEvent e) {
+    public void onItemDrop(BlockDropItemEvent e) {
         Player p = e.getPlayer();
         if (p.getLevel() > minimumLevel) {
             return;

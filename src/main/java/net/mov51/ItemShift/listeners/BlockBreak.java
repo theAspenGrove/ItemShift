@@ -13,7 +13,7 @@ import static net.mov51.ItemShift.util.HoldingGold.*;
 public class BlockBreak implements Listener {
     public static HashSet<Player> brokenPlayers = new HashSet<>();
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onDamageEvent(BlockBreakEvent e) {
+    public void onBlockBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
         if(e.isDropItems() && (isHoldingGold(p) || hasNuggets(p, true))){
             brokenPlayers.add(e.getPlayer());
