@@ -40,6 +40,10 @@ public class HoldingGold {
     public static boolean isHoldingGold(Player player) {
         return Arrays.asList(Arrays.stream(goldTools).toArray()).contains(player.getInventory().getItemInMainHand().getType());
     }
+
+    public static boolean isHoldingShulker(Player player) {
+        return Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(player.getInventory().getItemInOffHand().getType());
+    }
     public static boolean hasNuggets(Player player, boolean remove) {
         ItemStack[] inv = player.getInventory().getContents();
         ItemStack[] hotBar = Arrays.copyOfRange(inv, 0, 9);

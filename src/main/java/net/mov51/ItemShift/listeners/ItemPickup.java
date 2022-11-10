@@ -13,6 +13,7 @@ import java.util.Collections;
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
 import static net.mov51.ItemShift.util.GiveItem.fillShulker;
 import static net.mov51.ItemShift.util.HoldingGold.Shulkers;
+import static net.mov51.ItemShift.util.HoldingGold.isHoldingShulker;
 
 public class ItemPickup implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
@@ -24,7 +25,7 @@ public class ItemPickup implements Listener {
             }
             ItemStack offHand = p.getInventory().getItemInOffHand();
             //check if offhand is a shulker
-            if(Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(offHand.getType())){
+            if(isHoldingShulker(p)){
                 //prevent item pickup
                 e.setCancelled(true);
                 //remove the item from the world
