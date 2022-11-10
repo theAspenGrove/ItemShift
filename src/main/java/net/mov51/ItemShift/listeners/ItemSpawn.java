@@ -19,24 +19,25 @@ public class ItemSpawn implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onBreak(BlockDropItemEvent e) {
         Player p = e.getPlayer();
+        if (p.getLevel() > minimumLevel) {
+            return;
+        }
         if (!e.isCancelled() && p.getGameMode() == GameMode.SURVIVAL) {
             if (isHoldingGold(p) || hasNuggets(p, false)) {
-                if (p.getLevel() > minimumLevel) {
-                    ItemStack offHand = p.getInventory().getItemInOffHand();
-                    //check if offhand is a shulker
-                    if(Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(offHand.getType())){
-                        //add item to shulker box using the returned item meta
-                        offHand.setItemMeta(fillShulker(p,e.getItems()));
-                        //prevent block from dropping items
-                        e.setCancelled(true);
-                        //exit event
-                        return;
-                    }
-                    //give items that the block has dropped
-                    giveItem(p, e.getItems());
+                ItemStack offHand = p.getInventory().getItemInOffHand();
+                //check if offhand is a shulker
+                if(Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(offHand.getType())){
+                    //add item to shulker box using the returned item meta
+                    offHand.setItemMeta(fillShulker(p,e.getItems()));
                     //prevent block from dropping items
                     e.setCancelled(true);
+                    //exit event
+                    return;
                 }
+                //give items that the block has dropped
+                giveItem(p, e.getItems());
+                //prevent block from dropping items
+                e.setCancelled(true);
             }
         }
     }
