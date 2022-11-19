@@ -19,20 +19,21 @@ public class ItemPickup implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPickup(EntityPickupItemEvent e) {
         if(e.getEntity() instanceof Player){
-            Player p = (Player) e.getEntity();
-            if(p.getLevel() < minimumLevel){
-                return;
-            }
-            ItemStack offHand = p.getInventory().getItemInOffHand();
-            //check if offhand is a shulker
-            if(isHoldingShulker(p)){
-                //prevent item pickup
-                e.setCancelled(true);
-                //remove the item from the world
-                e.getItem().remove();
-                //add item to shulker box using the returned item meta
-                offHand.setItemMeta(fillShulker(p, Collections.singletonList(e.getItem())));
-            }
-    }
+            return;
+        }
+        Player p = (Player) e.getEntity();
+        if(p.getLevel() < minimumLevel){
+            return;
+        }
+        ItemStack offHand = p.getInventory().getItemInOffHand();
+        //check if offhand is a shulker
+        if(isHoldingShulker(p)){
+            //prevent item pickup
+            e.setCancelled(true);
+            //remove the item from the world
+            e.getItem().remove();
+            //add item to shulker box using the returned item meta
+            offHand.setItemMeta(fillShulker(p, Collections.singletonList(e.getItem())));
+        }
     }
 }
