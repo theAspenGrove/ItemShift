@@ -7,18 +7,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
 import static net.mov51.ItemShift.util.GiveItem.fillShulker;
-import static net.mov51.ItemShift.util.HoldingGold.Shulkers;
 import static net.mov51.ItemShift.util.HoldingGold.isHoldingShulker;
 
 public class ItemPickup implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPickup(EntityPickupItemEvent e) {
-        if(e.getEntity() instanceof Player){
+        if(!(e.getEntity() instanceof Player)){
             return;
         }
         Player p = (Player) e.getEntity();

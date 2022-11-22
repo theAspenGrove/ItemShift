@@ -8,8 +8,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
-
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
 import static net.mov51.ItemShift.util.GiveItem.fillShulker;
 import static net.mov51.ItemShift.util.GiveItem.giveItem;
@@ -25,7 +23,7 @@ public class ItemSpawn implements Listener {
         if (p.getGameMode() != GameMode.SURVIVAL) {
             return;
         }
-        if(!e.isCancelled()){
+        if(e.isCancelled()){
             return;
         }
         if (isHoldingGold(p) || hasNuggets(p, false)) {
