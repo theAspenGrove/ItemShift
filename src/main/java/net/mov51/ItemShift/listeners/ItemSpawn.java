@@ -17,7 +17,7 @@ public class ItemSpawn implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onItemDrop(BlockDropItemEvent e) {
         Player p = e.getPlayer();
-        if (p.getLevel() < minimumLevel) {
+        if (p.getLevel() <= minimumLevel) {
             return;
         }
         if (p.getGameMode() != GameMode.SURVIVAL) {

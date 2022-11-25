@@ -20,7 +20,7 @@ public class ItemPickup implements Listener {
             return;
         }
         Player p = (Player) e.getEntity();
-        if(p.getLevel() < minimumLevel){
+        if(p.getLevel() <= minimumLevel){
             return;
         }
         ItemStack offHand = p.getInventory().getItemInOffHand();

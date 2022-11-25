@@ -17,7 +17,7 @@ public class ItemDamage implements Listener {
         if(!brokenPlayers.contains(p)) {
             return;
         }
-        if ((p.getLevel() < minimumLevel)) {
+        if ((p.getLevel() <= minimumLevel)) {
             return;
         }
         if(e.getDamage() > 0 && e.getPlayer().getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.MENDING)){
