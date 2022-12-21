@@ -12,6 +12,8 @@ import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
 import static net.mov51.ItemShift.util.GiveItem.fillShulker;
 import static net.mov51.ItemShift.util.GiveItem.giveItem;
 import static net.mov51.ItemShift.util.HoldingGold.*;
+import static net.mov51.ItemShift.util.ShiftToLodeStone.isHoldingLodeStoneCompass;
+import static net.mov51.ItemShift.util.ShiftToLodeStone.sendToLodeStone;
 
 public class ItemSpawn implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
@@ -35,6 +37,11 @@ public class ItemSpawn implements Listener {
                 //prevent block from dropping items
                 e.setCancelled(true);
                 //exit event
+                return;
+            }
+            if(isHoldingLodeStoneCompass(p)){
+                sendToLodeStone(p,e.getItems());
+                e.setCancelled(true);
                 return;
             }
             //give items that the block has dropped
