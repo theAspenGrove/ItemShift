@@ -40,7 +40,7 @@ public class ItemSpawn implements Listener {
                 return;
             }
             if(isHoldingLodeStoneCompass(p)){
-                sendToLodeStone(p,e.getItems());
+                sendToLodeStone(p,e.getItems(),e.getBlock().getLocation());
                 e.setCancelled(true);
                 return;
             }

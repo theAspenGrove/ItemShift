@@ -10,6 +10,7 @@ public class ConfigHelper {
     public static int mendingMultiplier;
     public static int nuggetCost;
     public static int shulkerFillCost;
+    public static double lodestoneFillCost;
     public static int minimumLevel;
     public static void loadConfig(){
         c = ItemShift.plugin.getConfig();
@@ -18,6 +19,7 @@ public class ConfigHelper {
         nuggetCost = (c.getInt("nugget-cost") != 0 ? c.getInt("nugget-cost") : 1);
         mendingMultiplier = (c.getInt("mending-multiplier") != 0 ? c.getInt("mending-multiplier") : 5);
         shulkerFillCost = (c.getInt("shulker-fill-cost") != 0 ? c.getInt("shulker-fill-cost") : 1);
+        lodestoneFillCost = (c.getDouble("lodestone-shift-cost") != 0 ? c.getDouble("lodestone-shift-cost") : 0.3);
         minimumLevel = (c.getInt("minimum-level") != 0 ? c.getInt("minimum-level") : 0);
     }
 }
