@@ -37,6 +37,7 @@ public class ShiftToLodeStone {
             if(l.getBlock().getType().equals(Material.CHEST)){
                 Chest c = (Chest) l.getBlock().getState();
                 leftOvers = c.getBlockInventory().addItem(item);
+                p.giveExp(-LodeStoneCost);
                 if(!leftOvers.isEmpty()){
                     for (ItemStack i : leftOvers.values()) {
                         l.getWorld().dropItemNaturally(l,i);

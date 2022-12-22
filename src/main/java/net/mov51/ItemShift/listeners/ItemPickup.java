@@ -12,6 +12,8 @@ import java.util.Collections;
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
 import static net.mov51.ItemShift.util.GiveItem.fillShulker;
 import static net.mov51.ItemShift.util.HoldingGold.isHoldingShulker;
+import static net.mov51.ItemShift.util.ShiftToLodeStone.isHoldingLodeStoneCompass;
+import static net.mov51.ItemShift.util.ShiftToLodeStone.sendToLodeStone;
 
 public class ItemPickup implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
@@ -32,6 +34,12 @@ public class ItemPickup implements Listener {
             e.getItem().remove();
             //add item to shulker box using the returned item meta
             offHand.setItemMeta(fillShulker(p, Collections.singletonList(e.getItem())));
+            return;
+        }
+        if(isHoldingLodeStoneCompass(p)){
+            e.setCancelled(true);
+            e.getItem().remove();
+            sendToLodeStone(p,Collections.singletonList(e.getItem()) , e.getItem().getLocation());
         }
     }
 }
