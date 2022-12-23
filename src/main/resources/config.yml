@@ -1,6 +1,7 @@
 minimum-level: 0
+lodestone-minimum-level: 32
+lodestone-shift-cost: 0.3
 level-cost: 1
 mending-multiplier: 5
 nugget-cost: 1
 shulker-fill-cost: 1
-lodestone-shift-cost: 0.3

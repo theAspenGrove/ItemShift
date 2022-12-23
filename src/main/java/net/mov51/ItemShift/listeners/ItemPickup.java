@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Collections;
 
+import static net.mov51.ItemShift.util.ConfigHelper.lodestoneMinimumLevel;
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
 import static net.mov51.ItemShift.util.GiveItem.fillShulker;
 import static net.mov51.ItemShift.util.HoldingGold.isHoldingShulker;
@@ -36,7 +37,7 @@ public class ItemPickup implements Listener {
             offHand.setItemMeta(fillShulker(p, Collections.singletonList(e.getItem())));
             return;
         }
-        if(isHoldingLodeStoneCompass(p)){
+        if(isHoldingLodeStoneCompass(p) && p.getLevel() >= lodestoneMinimumLevel){
             e.setCancelled(true);
             e.getItem().remove();
             sendToLodeStone(p,Collections.singletonList(e.getItem()) , e.getItem().getLocation());

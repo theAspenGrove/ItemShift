@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
+import static net.mov51.ItemShift.util.ConfigHelper.lodestoneMinimumLevel;
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
 import static net.mov51.ItemShift.util.GiveItem.fillShulker;
 import static net.mov51.ItemShift.util.GiveItem.giveItem;
@@ -39,7 +40,7 @@ public class ItemSpawn implements Listener {
                 //exit event
                 return;
             }
-            if(isHoldingLodeStoneCompass(p)){
+            if(isHoldingLodeStoneCompass(p) && p.getLevel() >= lodestoneMinimumLevel){
                 sendToLodeStone(p,e.getItems(),e.getBlock().getLocation());
                 e.setCancelled(true);
                 return;

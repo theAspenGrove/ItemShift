@@ -12,6 +12,7 @@ public class ConfigHelper {
     public static int shulkerFillCost;
     public static double lodestoneFillCost;
     public static int minimumLevel;
+    public static int lodestoneMinimumLevel;
     public static void loadConfig(){
         c = ItemShift.plugin.getConfig();
         levelCost = (c.getInt("level-cost") != 0 ? c.getInt("level-cost") : 1);
@@ -21,5 +22,6 @@ public class ConfigHelper {
         shulkerFillCost = (c.getInt("shulker-fill-cost") != 0 ? c.getInt("shulker-fill-cost") : 1);
         lodestoneFillCost = (c.getDouble("lodestone-shift-cost") != 0 ? c.getDouble("lodestone-shift-cost") : 0.3);
         minimumLevel = (c.getInt("minimum-level") != 0 ? c.getInt("minimum-level") : 0);
+        lodestoneMinimumLevel = (c.getInt("lodestone-minimum-level") != 0 ? c.getInt("lodestone-minimum-level") : 0);
     }
 }
