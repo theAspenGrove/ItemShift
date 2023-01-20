@@ -19,4 +19,7 @@ public class XPHelper {
     private static int pointsToLevel(int progressRequired,float progress){
         return Math.round(progressRequired * progress);
     }
+    public static boolean hasEnoughXP(Player p, int amount){
+        return getTotalExpPoints(p) >= amount;
+    }
 }

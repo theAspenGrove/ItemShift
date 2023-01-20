@@ -6,15 +6,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDropItemEvent;
-import org.bukkit.inventory.ItemStack;
 
-import static net.mov51.ItemShift.util.ConfigHelper.lodestoneMinimumLevel;
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
-import static net.mov51.ItemShift.util.GiveItem.fillShulker;
 import static net.mov51.ItemShift.util.GiveItem.giveItem;
 import static net.mov51.ItemShift.util.HoldingGold.*;
-import static net.mov51.ItemShift.util.ShiftToLodeStone.isHoldingLodeStoneCompass;
-import static net.mov51.ItemShift.util.ShiftToLodeStone.sendToLodeStone;
 
 public class ItemSpawn implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
@@ -30,24 +25,7 @@ public class ItemSpawn implements Listener {
             return;
         }
         if (isHoldingGold(p) || hasNuggets(p, false)) {
-            ItemStack offHand = p.getInventory().getItemInOffHand();
-            //check if offhand is a shulker
-            if(isHoldingShulker(p)){
-                //add item to shulker box using the returned item meta
-                offHand.setItemMeta(fillShulker(p,e.getItems()));
-                //prevent block from dropping items
-                e.setCancelled(true);
-                //exit event
-                return;
-            }
-            if(isHoldingLodeStoneCompass(p) && p.getLevel() >= lodestoneMinimumLevel){
-                sendToLodeStone(p,e.getItems(),e.getBlock().getLocation());
-                e.setCancelled(true);
-                return;
-            }
-            //give items that the block has dropped
-            giveItem(p, e.getItems());
-            //prevent block from dropping items
+            giveItem(p, e.getItems(), e.getBlock().getLocation());
             e.setCancelled(true);
         }
     }
