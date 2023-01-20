@@ -22,23 +22,25 @@ import static org.bukkit.Sound.ENTITY_ITEM_PICKUP;
 
 public class GiveItem {
 
-    public static void giveItem(Player p, ItemStack item, Location blockLocation){
+    public static boolean handleOffhand(Player p, ItemStack item, Location blockLocation){
         if(isHoldingLodeStoneCompass(p) && p.getLevel() >= lodestoneMinimumLevel){
             shiftItemToLocation(p,blockLocation,item);
-            return;
+            return true;
         }
         if(isHoldingShulker(p) && hasEnoughXP(p,shulkerFillCost)){
             //add item to shulker box using the returned item meta
             p.getInventory().getItemInOffHand().setItemMeta(fillShulker(p,item));
             //prevent block from dropping items
-            return;
+            return true;
         }
-        giveItemToPlayer(p,item);
+        return false;
     }
-    public static void giveItem(Player p, List<Item> items, Location blockLocation){
+    public static void giveItems(Player p, List<Item> items, Location blockLocation){
         for(Item i : items){
             //run the standard give item method for every item in the list
-            giveItem(p,i.getItemStack(), blockLocation);
+            if(!handleOffhand(p,i.getItemStack(), blockLocation)){
+                giveItemToPlayer(p,i.getItemStack());
+            }
         }
     }
 

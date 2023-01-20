@@ -8,7 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDropItemEvent;
 
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
-import static net.mov51.ItemShift.util.GiveItem.giveItem;
+import static net.mov51.ItemShift.util.GiveItem.giveItems;
+import static net.mov51.ItemShift.util.GiveItem.handleOffhand;
 import static net.mov51.ItemShift.util.HoldingGold.*;
 
 public class ItemSpawn implements Listener {
@@ -25,7 +26,7 @@ public class ItemSpawn implements Listener {
             return;
         }
         if (isHoldingGold(p) || hasNuggets(p, false)) {
-            giveItem(p, e.getItems(), e.getBlock().getLocation());
+            giveItems(p, e.getItems(), e.getBlock().getLocation());
             e.setCancelled(true);
         }
     }

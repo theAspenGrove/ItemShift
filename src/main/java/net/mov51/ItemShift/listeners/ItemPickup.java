@@ -1,5 +1,6 @@
 package net.mov51.ItemShift.listeners;
 
+import net.mov51.ItemShift.util.GiveItem;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -7,7 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
-import static net.mov51.ItemShift.util.GiveItem.giveItem;
+import static net.mov51.ItemShift.util.GiveItem.handleOffhand;
 
 public class ItemPickup implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
@@ -25,6 +26,9 @@ public class ItemPickup implements Listener {
         if(e.isCancelled()){
             return;
         }
-        giveItem(p, e.getItem().getItemStack(), e.getItem().getLocation());
+        if(handleOffhand(p, e.getItem().getItemStack(), e.getItem().getLocation())){
+            e.getItem().remove();
+            e.setCancelled(true);
+        }
     }
 }
