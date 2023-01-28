@@ -78,7 +78,7 @@ public class GiveItem {
             playPickupSound(p);
             incrementPickupStat(p,item);
             //remove the shulkerFillCost from the player's level
-            p.giveExp(-shulkerFillCost);p.giveExp(-shulkerFillCost);
+            p.giveExp(-shulkerFillCost);
         }
         //set the block state to the shulker box
         meta.setBlockState(box);
