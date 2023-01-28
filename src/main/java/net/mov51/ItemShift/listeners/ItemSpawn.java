@@ -9,7 +9,6 @@ import org.bukkit.event.block.BlockDropItemEvent;
 
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
 import static net.mov51.ItemShift.util.GiveItem.giveItems;
-import static net.mov51.ItemShift.util.GiveItem.handleOffhand;
 import static net.mov51.ItemShift.util.HoldingGold.*;
 
 public class ItemSpawn implements Listener {

@@ -14,8 +14,7 @@ import java.util.*;
 
 import static net.mov51.ItemShift.util.ConfigHelper.lodestoneMinimumLevel;
 import static net.mov51.ItemShift.util.ConfigHelper.shulkerFillCost;
-import static net.mov51.ItemShift.util.HoldingGold.Shulkers;
-import static net.mov51.ItemShift.util.HoldingGold.isHoldingShulker;
+import static net.mov51.ItemShift.util.HoldingGold.*;
 import static net.mov51.ItemShift.util.ShiftToLodeStone.*;
 import static net.mov51.ItemShift.util.XPHelper.hasEnoughXP;
 import static org.bukkit.Sound.ENTITY_ITEM_PICKUP;
@@ -23,11 +22,14 @@ import static org.bukkit.Sound.ENTITY_ITEM_PICKUP;
 public class GiveItem {
 
     public static boolean handleOffhand(Player p, ItemStack item, Location blockLocation){
+        if(!isShulker(item)){
+            return false;
+        }
         if(isHoldingLodeStoneCompass(p) && p.getLevel() >= lodestoneMinimumLevel){
             shiftItemToLocation(p,blockLocation,item);
             return true;
         }
-        if(isHoldingShulker(p) && hasEnoughXP(p,shulkerFillCost)){
+        if(isShulker(p.getInventory().getItemInOffHand()) && hasEnoughXP(p,shulkerFillCost)){
             //add item to shulker box using the returned item meta
             p.getInventory().getItemInOffHand().setItemMeta(fillShulker(p,item));
             //prevent block from dropping items
@@ -63,10 +65,6 @@ public class GiveItem {
         BlockStateMeta meta = (BlockStateMeta) p.getInventory().getItemInOffHand().getItemMeta();
         //cast the block state to a shulker box
         ShulkerBox box = (ShulkerBox) meta.getBlockState();
-        //loop through every item one by one
-        if(Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(item.getType())){
-            giveItemToPlayer(p,item);
-        }
         //add items to the shulker box then get the leftovers from the shulker box and drop them on the ground
         HashMap <Integer, ItemStack> leftovers = box.getInventory().addItem(item);
         if(leftovers.size() > 0) {
