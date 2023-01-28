@@ -26,6 +26,8 @@ public class ItemSpawn implements Listener {
         }
         if (isHoldingGold(p) || hasNuggets(p, false)) {
             giveItems(p, e.getItems(), e.getBlock().getLocation());
+            //Always cancel the event if handling it.
+            //This prevents the items from duplicating!!
             e.setCancelled(true);
         }
     }

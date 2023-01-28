@@ -22,7 +22,7 @@ import static org.bukkit.Sound.ENTITY_ITEM_PICKUP;
 public class GiveItem {
 
     public static boolean handleOffhand(Player p, ItemStack item, Location blockLocation){
-        if(!isShulker(item)){
+        if(isShulker(item)){
             return false;
         }
         if(isHoldingLodeStoneCompass(p) && p.getLevel() >= lodestoneMinimumLevel){
@@ -45,7 +45,6 @@ public class GiveItem {
             }
         }
     }
-
     public static void giveItemToPlayer(Player p, ItemStack item){
         //give the item and get the leftovers as a list
         HashMap <Integer, ItemStack> leftovers = p.getInventory().addItem(item);
@@ -59,7 +58,6 @@ public class GiveItem {
             incrementPickupStat(p,item);
         }
     }
-
     public static ItemMeta fillShulker(Player p, ItemStack item) {
         //get the block meta for the player's offhand assuming it's a shulker box.
         BlockStateMeta meta = (BlockStateMeta) p.getInventory().getItemInOffHand().getItemMeta();

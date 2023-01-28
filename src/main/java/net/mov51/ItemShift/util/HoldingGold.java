@@ -37,8 +37,26 @@ public class HoldingGold {
             Material.YELLOW_SHULKER_BOX,
             Material.SHULKER_BOX
     };
+    public static Material[] goldArmor = {
+            Material.GOLDEN_HELMET,
+            Material.GOLDEN_CHESTPLATE,
+            Material.GOLDEN_LEGGINGS,
+            Material.GOLDEN_BOOTS
+    };
     public static boolean isHoldingGold(Player player) {
         return Arrays.asList(Arrays.stream(goldTools).toArray()).contains(player.getInventory().getItemInMainHand().getType());
+    }
+    public static boolean isWearingGoldArmor(Player player){
+        if(player.getInventory().getHelmet() != null){
+            return Arrays.asList(Arrays.stream(goldArmor).toArray()).contains(player.getInventory().getHelmet().getType());
+        }else if(player.getInventory().getChestplate() != null){
+            return Arrays.asList(Arrays.stream(goldArmor).toArray()).contains(player.getInventory().getChestplate().getType());
+        }else if(player.getInventory().getLeggings() != null){
+            return Arrays.asList(Arrays.stream(goldArmor).toArray()).contains(player.getInventory().getLeggings().getType());
+        }else if(player.getInventory().getBoots() != null){
+            return Arrays.asList(Arrays.stream(goldArmor).toArray()).contains(player.getInventory().getBoots().getType());
+        }
+        return false;
     }
     public static boolean isShulker(ItemStack item){
         return Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(item.getType());

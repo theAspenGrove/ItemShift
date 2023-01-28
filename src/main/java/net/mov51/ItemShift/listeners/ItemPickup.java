@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
 import static net.mov51.ItemShift.util.GiveItem.handleOffhand;
+import static net.mov51.ItemShift.util.HoldingGold.isWearingGoldArmor;
 
 public class ItemPickup implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
@@ -26,9 +27,16 @@ public class ItemPickup implements Listener {
         if(e.isCancelled()){
             return;
         }
-        if(handleOffhand(p, e.getItem().getItemStack(), e.getItem().getLocation())){
-            e.getItem().remove();
-            e.setCancelled(true);
+        if(isWearingGoldArmor(p)){
+            if(handleOffhand(p, e.getItem().getItemStack(), e.getItem().getLocation())){
+                //Always cancel the event if handling it.
+                //This prevents the items from duplicating!!
+                //This in particular wil present as the player picking up the item infinitely.
+                e.getItem().remove();
+                //Always cancel the event if handling it.
+                //This prevents the items from duplicating!!
+                e.setCancelled(true);
+            }
         }
     }
 }
