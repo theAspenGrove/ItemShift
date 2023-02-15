@@ -37,24 +37,18 @@ public class HoldingGold {
             Material.YELLOW_SHULKER_BOX,
             Material.SHULKER_BOX
     };
-    public static Material[] goldArmor = {
-            Material.GOLDEN_HELMET,
-            Material.GOLDEN_CHESTPLATE,
-            Material.GOLDEN_LEGGINGS,
-            Material.GOLDEN_BOOTS
-    };
     public static boolean isHoldingGold(Player player) {
         return Arrays.asList(Arrays.stream(goldTools).toArray()).contains(player.getInventory().getItemInMainHand().getType());
     }
     public static boolean isWearingGoldArmor(Player player){
-        if(player.getInventory().getHelmet() != null){
-            return Arrays.asList(Arrays.stream(goldArmor).toArray()).contains(player.getInventory().getHelmet().getType());
-        }else if(player.getInventory().getChestplate() != null){
-            return Arrays.asList(Arrays.stream(goldArmor).toArray()).contains(player.getInventory().getChestplate().getType());
-        }else if(player.getInventory().getLeggings() != null){
-            return Arrays.asList(Arrays.stream(goldArmor).toArray()).contains(player.getInventory().getLeggings().getType());
-        }else if(player.getInventory().getBoots() != null){
-            return Arrays.asList(Arrays.stream(goldArmor).toArray()).contains(player.getInventory().getBoots().getType());
+        if(player.getInventory().getHelmet() != null && player.getInventory().getHelmet().getType() == Material.GOLDEN_HELMET){
+            return true;
+        }else if(player.getInventory().getChestplate() != null && player.getInventory().getChestplate().getType() == Material.GOLDEN_CHESTPLATE){
+            return true;
+        }else if(player.getInventory().getLeggings() != null && player.getInventory().getLeggings().getType() == Material.GOLDEN_LEGGINGS){
+            return true;
+        }else if(player.getInventory().getBoots() != null && player.getInventory().getBoots().getType() == Material.GOLDEN_BOOTS){
+            return true;
         }
         return false;
     }
