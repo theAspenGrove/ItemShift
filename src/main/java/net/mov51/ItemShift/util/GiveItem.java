@@ -22,17 +22,38 @@ import static org.bukkit.Sound.ENTITY_ITEM_PICKUP;
 public class GiveItem {
 
     public static boolean handleOffhand(Player p, ItemStack item, Location blockLocation){
-        if(isShulker(item)){
-            return false;
-        }
         if(isHoldingLodeStoneCompass(p) && p.getLevel() >= lodestoneMinimumLevel){
             shiftItemToLocation(p,blockLocation,item);
             return true;
         }
-        if(isShulker(p.getInventory().getItemInOffHand()) && hasEnoughXP(p,shulkerFillCost)){
-            //add item to shulker box using the returned item meta
-            p.getInventory().getItemInOffHand().setItemMeta(fillShulker(p,item));
-            //prevent block from dropping items
+        if(isShulker(p.getInventory().getItemInOffHand())){
+            //get the block meta for the player's offhand assuming it's a shulker box.
+            BlockStateMeta meta = (BlockStateMeta) p.getInventory().getItemInOffHand().getItemMeta();
+            //cast the block state to a shulker box
+            ShulkerBox box = (ShulkerBox) meta.getBlockState();
+            //get the item in the first slot of the Shulker Box
+            ItemStack i = box.getInventory().getItem(0);
+            //if the item in the first slot is not null and is a LodeStone Compass
+            if(i != null && isLodeStoneCompass(i)){
+                //if the shulker box contains an item of the same type as the item being handled
+                if(box.getInventory().contains(item.getType())){
+                    shiftItemToLocation(p,i,blockLocation,item);
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            //only progresses to here if the Shulker Box does not contain a LodeStone Compass
+            //if the player has enough XP to fill the Shulker box
+            if(hasEnoughXP(p,shulkerFillCost)){
+                //do not fill the Shulker with a Shulker
+                if(isShulker(item)){
+                    return false;
+                }
+                //add item to shulker box using the returned item meta
+                p.getInventory().getItemInOffHand().setItemMeta(fillShulker(p,item));
+                //prevent block from dropping items
+            }
             return true;
         }
         return false;
