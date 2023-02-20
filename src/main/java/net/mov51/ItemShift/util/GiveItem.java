@@ -71,7 +71,14 @@ public class GiveItem {
         HashMap <Integer, ItemStack> leftovers = null;
         ItemStack offhand = p.getInventory().getItemInOffHand();
         if(offhand.asOne().equals(item.asOne()) && offhand.getAmount() < offhand.getMaxStackSize()){
-            p.getInventory().getItemInOffHand().setAmount(offhand.getAmount() + 1);
+            if(offhand.getAmount() + item.getAmount() < offhand.getMaxStackSize()){
+                p.getInventory().getItemInOffHand().setAmount(offhand.getAmount() + item.getAmount());
+            }else{
+                int leftover = offhand.getAmount() + item.getAmount() - offhand.getMaxStackSize();
+                p.getInventory().getItemInOffHand().setAmount(offhand.getMaxStackSize());
+                item.setAmount(leftover);
+                leftovers = p.getInventory().addItem(item);
+            }
         }else{
             leftovers = p.getInventory().addItem(item);
         }
