@@ -53,8 +53,8 @@ public class GiveItem {
                 //add item to shulker box using the returned item meta
                 p.getInventory().getItemInOffHand().setItemMeta(fillShulker(p,item));
                 //prevent block from dropping items
+                return true;
             }
-            return true;
         }
         return false;
     }
