@@ -68,9 +68,15 @@ public class GiveItem {
     }
     public static void giveItemToPlayer(Player p, ItemStack item){
         //give the item and get the leftovers as a list
-        HashMap <Integer, ItemStack> leftovers = p.getInventory().addItem(item);
+        HashMap <Integer, ItemStack> leftovers = null;
+        ItemStack offhand = p.getInventory().getItemInOffHand();
+        if(offhand.asOne().equals(item.asOne()) && offhand.getAmount() < offhand.getMaxStackSize()){
+            p.getInventory().getItemInOffHand().setAmount(offhand.getAmount() + 1);
+        }else{
+            leftovers = p.getInventory().addItem(item);
+        }
         //if there are leftovers, drop them on the ground
-        if(leftovers.size() > 0){
+        if(leftovers != null && leftovers.size() > 0){
             for(ItemStack i : leftovers.values()){
                 p.getWorld().dropItem(p.getLocation(),i);
             }
