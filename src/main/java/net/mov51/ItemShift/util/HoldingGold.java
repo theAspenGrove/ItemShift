@@ -53,7 +53,10 @@ public class HoldingGold {
         return false;
     }
     public static boolean isShulker(ItemStack item){
-        return Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(item.getType());
+        return isShulker(item.getType());
+    }
+    public static boolean isShulker(Material material){
+        return Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(material);
     }
     public static boolean hasNuggets(Player player, boolean remove) {
         ItemStack[] inv = player.getInventory().getContents();
