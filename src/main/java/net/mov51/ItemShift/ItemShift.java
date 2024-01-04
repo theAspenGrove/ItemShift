@@ -1,9 +1,6 @@
 package net.mov51.ItemShift;
 
-import net.mov51.ItemShift.listeners.BlockBreak;
-import net.mov51.ItemShift.listeners.ItemDamage;
-import net.mov51.ItemShift.listeners.ItemPickup;
-import net.mov51.ItemShift.listeners.ItemSpawn;
+import net.mov51.ItemShift.listeners.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -27,6 +24,7 @@ public final class ItemShift extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ItemDamage(), this);
         getServer().getPluginManager().registerEvents(new BlockBreak(), this);
         getServer().getPluginManager().registerEvents(new ItemPickup(), this);
+        getServer().getPluginManager().registerEvents(new PlayerInteractEventListener(), this);
         //send enable message
         logger.log(Level.INFO, "Items are being shifted!");
     }
