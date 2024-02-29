@@ -4,5 +4,3 @@ main: net.mov51.ItemShift.ItemShift
 api-version: 1.17
 description: Shifts items around
 author: mov51
-depend:
-  - Periderm

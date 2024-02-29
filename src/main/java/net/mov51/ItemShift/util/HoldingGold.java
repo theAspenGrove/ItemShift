@@ -40,9 +40,23 @@ public class HoldingGold {
     public static boolean isHoldingGold(Player player) {
         return Arrays.asList(Arrays.stream(goldTools).toArray()).contains(player.getInventory().getItemInMainHand().getType());
     }
-
-    public static boolean isHoldingShulker(Player player) {
-        return Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(player.getInventory().getItemInOffHand().getType());
+    public static boolean isWearingGoldArmor(Player player){
+        if(player.getInventory().getHelmet() != null && player.getInventory().getHelmet().getType() == Material.GOLDEN_HELMET){
+            return true;
+        }else if(player.getInventory().getChestplate() != null && player.getInventory().getChestplate().getType() == Material.GOLDEN_CHESTPLATE){
+            return true;
+        }else if(player.getInventory().getLeggings() != null && player.getInventory().getLeggings().getType() == Material.GOLDEN_LEGGINGS){
+            return true;
+        }else if(player.getInventory().getBoots() != null && player.getInventory().getBoots().getType() == Material.GOLDEN_BOOTS){
+            return true;
+        }
+        return false;
+    }
+    public static boolean isShulker(ItemStack item){
+        return isShulker(item.getType());
+    }
+    public static boolean isShulker(Material material){
+        return Arrays.asList(Arrays.stream(Shulkers).toArray()).contains(material);
     }
     public static boolean hasNuggets(Player player, boolean remove) {
         ItemStack[] inv = player.getInventory().getContents();

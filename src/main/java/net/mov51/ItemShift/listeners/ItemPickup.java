@@ -1,17 +1,15 @@
 package net.mov51.ItemShift.listeners;
 
+import net.mov51.ItemShift.util.GiveItem;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.Collections;
-
 import static net.mov51.ItemShift.util.ConfigHelper.minimumLevel;
-import static net.mov51.ItemShift.util.GiveItem.fillShulker;
-import static net.mov51.ItemShift.util.HoldingGold.isHoldingShulker;
+import static net.mov51.ItemShift.util.GiveItem.handleOffhand;
+import static net.mov51.ItemShift.util.HoldingGold.isWearingGoldArmor;
 
 public class ItemPickup implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
@@ -20,18 +18,25 @@ public class ItemPickup implements Listener {
             return;
         }
         Player p = (Player) e.getEntity();
-        if(p.getLevel() <= minimumLevel){
+        if (p.getLevel() <= minimumLevel) {
             return;
         }
-        ItemStack offHand = p.getInventory().getItemInOffHand();
-        //check if offhand is a shulker
-        if(isHoldingShulker(p)){
-            //prevent item pickup
-            e.setCancelled(true);
-            //remove the item from the world
-            e.getItem().remove();
-            //add item to shulker box using the returned item meta
-            offHand.setItemMeta(fillShulker(p, Collections.singletonList(e.getItem())));
+        if (p.getGameMode() != GameMode.SURVIVAL) {
+            return;
+        }
+        if(e.isCancelled()){
+            return;
+        }
+        if(isWearingGoldArmor(p)){
+            if(handleOffhand(p, e.getItem().getItemStack(), e.getItem().getLocation())){
+                //Always cancel the event if handling it.
+                //This prevents the items from duplicating!!
+                //This in particular wil present as the player picking up the item infinitely.
+                e.getItem().remove();
+                //Always cancel the event if handling it.
+                //This prevents the items from duplicating!!
+                e.setCancelled(true);
+            }
         }
     }
 }
