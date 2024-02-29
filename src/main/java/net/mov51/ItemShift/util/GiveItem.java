@@ -118,7 +118,7 @@ public class GiveItem {
 
     public static void playPickupSound(Player p){
         Random random = new Random();
-        p.playSound(p.getLocation(), ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2f, (random.nextFloat() - random.nextFloat()) * 1.4f + 2.0f);
+        p.getWorld().playSound(p.getLocation(), ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2f, (random.nextFloat() - random.nextFloat()) * 1.4f + 2.0f);
     }
 
     public static void incrementPickupStat(Player p, ItemStack item){
